@@ -4,7 +4,7 @@ Spring application which upstreams the data from Elasticsearch index to Kafka
 
 Here, Kafka acts as a data pipeline where it can be consumed by [this](https://github.com/GaneshJayaram97/DownStreamApp) Spring application
 
-Data can be ingested to elasticsearch and kafka through REST API exposed. API details mentioned on the usage section below 
+Data can be ingested to elasticsearch and kafka through REST API exposed as well. API details mentioned on the usage section below 
 
 All the components required for installing / running this application has been packaged in a docker-compose file and details on achieving the same is present in Usage Section
 
@@ -26,18 +26,19 @@ It is recommended to add the maven binaries to $PATH environment variable so tha
 
 ## Usage
 
-Below are the steps to build/create containers.
+  Run below commands from root directory of the project 
 
-Execute the below commands from the source directory of the project
+1. Clone this repository in local / target machine 
 
-1. Build the application jar by running the below command
+
+2. Build the application jar
     ```
     mvn clean install
     ```
 
-2. Build and Run the containers 
+3. Build and Run the containers 
    
-    a. Start Kafka either as a standalone mode or cluster mode
+    a. Start Kafka either as a Standalone mode or Cluster mode
       
       i. To start Kafka as Standalone mode
       ```
@@ -53,7 +54,41 @@ Execute the below commands from the source directory of the project
    docker-compose up
    ``` 
 
-3. REST API
+4. To stop and remove the containers 
+    
+   ```
+   docker-compose -f <compose-file> down
+   ```
+   ```
+   docker container rm <container-id>
+   ```
+
+5. To update the configurations and re-deploy the containers 
+   
+   a. Make the required configuration changes in the application.properties
+   
+   b. Build the jar
+      ```
+      mvn clean install
+      ```
+   
+   c. Re-Deploy the containers
+      ```
+      docker-compose -f <compose-file> down
+      ```
+      ```
+      docker container rm <container-id>
+      ```
+      ```
+      docker-compose -f <compose-file> build
+      ```
+      ```
+      docker-compose -f <compose-file> up
+      ```
+      
+
+
+6. REST API
      
      Exposed in 8080 port and can be accessed via localhost hostname
      
